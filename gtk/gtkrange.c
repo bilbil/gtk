@@ -3991,33 +3991,30 @@ _gtk_range_set_steppers (GtkRange *range,
                          gboolean  has_d)
 {
   GtkRangePrivate *priv = range->priv;
+  gboolean vertical = (priv->orientation == GTK_ORIENTATION_VERTICAL);
 
   sync_stepper_gadget (range,
                        has_a, &priv->stepper_a_gadget,
-                       "up",
-                       priv->orientation == GTK_ORIENTATION_VERTICAL ?
-                       GTK_CSS_IMAGE_BUILTIN_ARROW_UP : GTK_CSS_IMAGE_BUILTIN_ARROW_LEFT,
+                       vertical ? "up" : "left",
+                       vertical ? GTK_CSS_IMAGE_BUILTIN_ARROW_UP : GTK_CSS_IMAGE_BUILTIN_ARROW_LEFT,
                        NULL);
 
   sync_stepper_gadget (range,
                        has_b, &priv->stepper_b_gadget,
-                       "down",
-                       priv->orientation == GTK_ORIENTATION_VERTICAL ?
-                       GTK_CSS_IMAGE_BUILTIN_ARROW_DOWN : GTK_CSS_IMAGE_BUILTIN_ARROW_RIGHT,
+                       vertical ? "down" : "right",
+                       vertical ? GTK_CSS_IMAGE_BUILTIN_ARROW_DOWN : GTK_CSS_IMAGE_BUILTIN_ARROW_RIGHT,
                        priv->stepper_a_gadget);
 
   sync_stepper_gadget (range,
                        has_c, &priv->stepper_c_gadget,
-                       "up",
-                       priv->orientation == GTK_ORIENTATION_VERTICAL ?
-                       GTK_CSS_IMAGE_BUILTIN_ARROW_UP : GTK_CSS_IMAGE_BUILTIN_ARROW_LEFT,
+                       vertical ? "up" : "left",
+                       vertical ? GTK_CSS_IMAGE_BUILTIN_ARROW_UP : GTK_CSS_IMAGE_BUILTIN_ARROW_LEFT,
                        priv->trough_gadget);
 
   sync_stepper_gadget (range,
                        has_d, &priv->stepper_d_gadget,
-                       "down",
-                       priv->orientation == GTK_ORIENTATION_VERTICAL ?
-                       GTK_CSS_IMAGE_BUILTIN_ARROW_DOWN : GTK_CSS_IMAGE_BUILTIN_ARROW_RIGHT,
+                       vertical ? "down" : "right",
+                       vertical ? GTK_CSS_IMAGE_BUILTIN_ARROW_DOWN : GTK_CSS_IMAGE_BUILTIN_ARROW_RIGHT,
                        priv->stepper_c_gadget ? priv->stepper_c_gadget : priv->trough_gadget);
 
   gtk_widget_queue_resize (GTK_WIDGET (range));
