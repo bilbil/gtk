@@ -220,21 +220,16 @@ deprecated_h_sources = ['deprecated/gdkcolor.h']
 
 gdk_headers = gdk_public_h_sources + deprecated_h_sources
 
-mkenum = find_program('build_enum.py')
-perl = find_program('perl')
-glib_mkenums = find_program('glib-mkenums')
-
-
 gdkenum_h = custom_target('gdkenum_h',
   output  : 'gdkenumtypes.h',
   input   : gdk_headers,
-  command : [mkenum, perl, glib_mkenums, '@OUTPUT@', '@INPUT@'])
+  command : [mkenum, perl, glib_mkenums, meson.current_source_dir() + '/gdkenumtypes.h.template', '@OUTPUT@', '@INPUT@'])
 
 gdkenum_c = custom_target('gdkenum_c',
   output  : 'gdkenumtypes.c',
   input   : gdk_headers,
-  depends : [gdkenum_h],
-  command : [mkenum, perl, glib_mkenums, '@OUTPUT@', '@INPUT@'])
+  depends : gdkenum_h,
+  command : [mkenum, perl, glib_mkenums, meson.current_source_dir() + '/gdkenumtypes.c.template', '@OUTPUT@', '@INPUT@'])
 
 gdkmarshal_h = custom_target('gdkmarshal_h',
   output  : 'gdkmarshall.h',

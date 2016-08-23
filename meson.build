@@ -26,6 +26,10 @@ broadway_enabled = get_option('enable-broadway-backend')
 
 mkmarshal = find_program('build_marshal.py')
 glib_marshal = find_program('glib-genmarshal')
+mkenum = find_program('build_enum.py')
+perl = find_program('perl')
+glib_mkenums = find_program('glib-mkenums')
+
 
 cc = meson.get_compiler('c')
 cdata = configuration_data()
